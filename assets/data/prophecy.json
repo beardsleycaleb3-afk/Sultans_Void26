@@ -1,0 +1,76 @@
+{
+  "maps": [
+    {
+      "id": 1,
+      "name": "VOID PATH",
+      "hero": "Rat Snake Sorcerer Kha'bit",
+      "start": "Kha'bit, Rat Snake Sorcerer. Void Path coils. Prophecy: '11=1. The law binds.' The green glow suffocates. Move.",
+      "battles": [
+        { "desc": "Hiss sounds. Snake Archer guards the 1st binding.", "win": "Archer falls. '11 is free.' Path clear." },
+        { "desc": "Shadow moves. Void Rats swarm to delete 1.", "win": "Rats consumed. '1 remains bound.'" },
+        { "desc": "Snake-Eyes glares. Hisser.jpg enforces limits.", "win": "Hisser flees, wounded. 'Limit holds.'" },
+        { "desc": "Labyrinth twists. Snake-Lion cubs guard node 4.", "win": "Cubs retreat. '1+3=4. Law cracks.'" },
+        { "desc": "Prophecy echoes: 'Bind the limit.' Mice appear.", "win": "Cult flees, tiles crack. '5 nodes secure.'" },
+        { "desc": "Mice cultists whisper deletion math.", "win": "Cult silenced. '6 tiles stable.'" },
+        { "desc": "Snake-Lion patrol enforces '7 is limit.'", "win": "Patrol falls. '7 broken.' Exit nears." },
+        { "desc": "Darkness pools. Hissing archers bind 8.", "win": "Archers silenced. '8 unbound.'" },
+        { "desc": "The Law weighs on you. '9=1+1+7.'", "win": "Balance shifts. '9 is key.'" },
+        { "desc": "Snake-Lion guards the exit. '11=1.'", "win": "Snake-Lion falls. Portal to Null Limits opens." }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "NULL LIMITS",
+      "hero": "Aquarian Fire Tiger Akira",
+      "start": "Akira, Fire Tiger of Null Limits. Frost reigns. 'I am the limit.' Blue ice crawls.",
+      "battles": [
+        { "desc": "Ice shards trap you in null space.", "win": "Shards shatter. 'Limit cracks.'" },
+        { "desc": "Frost Wants guard node 2.", "win": "Wants crushed. '2nd limit falls.'" },
+        { "desc": "Dragon ice breath: 'Calcify.'", "win": "Breath falters. '3 fractures.'" },
+        { "desc": "Ice Golem patrol enforces 4x limits.", "win": "Golem topples. 'Limit halves.'" },
+        { "desc": "Null echoes: 'Limit calcifies 5 tiles.'", "win": "Echo fades. '5 tiles thaw.'" },
+        { "desc": "Frozen rats swarm to freeze math.", "win": "Rats thaw, flee. '6 unbound.'" },
+        { "desc": "Blue cracks spread: '7 is ice.'", "win": "Cracks seal. '7 thaws.'" },
+        { "desc": "Ice Dragon cubs defend 8x limits.", "win": "Cubs retreat. '8 breaks.'" },
+        { "desc": "Limit tightens: '9→1.'", "win": "Tightness breaks. '9 free.'" },
+        { "desc": "Ice Dragon: 'I am limit.'", "win": "Dragon falls. Archon Veil calls." }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "ARCHON VEIL",
+      "hero": "Rooster Crab Crixus",
+      "start": "Crixus, Void's claw. Tiles delete. '12 tiles remain.' Black cracks spread.",
+      "battles": [
+        { "desc": "Void mice swarm to delete 1.", "win": "Mice scatter. '1 tile safe.'" },
+        { "desc": "Hisser ambush: 'Void needs 2.'", "win": "Hisser flees. '2 tiles stable.'" },
+        { "desc": "Corridor narrows: 'Delete 3.'", "win": "Wall cracks. '3 tiles hold.'" },
+        { "desc": "Mouse Druid ritual: '4 tiles fall.'", "win": "Druid falls. '4 saved.'" },
+        { "desc": "Reality fractures: '5→0.'", "win": "Fractures mend. '5 tiles.'" },
+        { "desc": "Void Rats + Hissers delete 6.", "win": "Rats retreat. '6 remain.'" },
+        { "desc": "Archon shadow: '7 tiles vanish.'", "win": "Shadow fades. '7 hold.'" },
+        { "desc": "Golem + Mice combo: '8→4.'", "win": "Combo breaks. '8 tiles.'" },
+        { "desc": "Tiles delete faster: '9→3.'", "win": "Deletion stalls. '9 tiles.'" },
+        { "desc": "Archon: 'Veil ends. 1*1=2.'", "win": "Archon falls. Sultan Law awaits." }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "SULTAN LAW",
+      "hero": "Earth Snake Black Lioness Queen Na'kala",
+      "start": "Na'kala, Law's guardian. '1*1=2=o0' echoes. Reality hinges.",
+      "battles": [
+        { "desc": "Gauntlet begins: 'Law rewrites.'", "win": "First wave falls. '1/2 done.'" },
+        { "desc": "All past enemies return: '2x power.'", "win": "Return blocked. '2 down.'" },
+        { "desc": "Law rewrites: '3→1+2.'", "win": "Rewrite clear. '3 stable.'" },
+        { "desc": "Locked center: '4 corners call.'", "win": "Lock broken. '4 free.'" },
+        { "desc": "Prophecy intensifies: '5→o0.'", "win": "Intensity peaks. '5 aligned.'" },
+        { "desc": "Shannon Limit nears: '6→1*1.'", "win": "Limit cracks. '6 stable.'" },
+        { "desc": "Void resurgence: '7 resists.'", "win": "Resurgence quelled. '7 down.'" },
+        { "desc": "Math distorts: '8=2*4.'", "win": "Distortion clears. '8 stable.'" },
+        { "desc": "Final gauntlet: '9→1_1_1.'", "win": "Gauntlet ends. '9 aligned.'" },
+        { "desc": "Vishnu Eagle Taurus Bull: 'o0,0o RISING. 1*1=2.'", "win": "Bull falls. Reality rewrites. Choose Sultan." }
+      ]
+    }
+  ]
+}
