@@ -1,18 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sultans Void 26</title>
-    
-    <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#000000">
-    
-    <link rel="stylesheet" href="./style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sultans Void26</title>
+<style>
+body{margin:0;background:#1a0033;color:#e6ccff;font-family:monospace;height:100vh;display:flex;flex-direction:column}
+#game{flex:3;background:#000;border:3px solid #6633cc;margin:8px;overflow:hidden;position:relative}
+#controls{flex:1;display:flex;gap:12px;padding:8px;justify-content:center;align-items:center}
+button{width:70px;height:70px;border-radius:15px;background:#6633cc;border:2px solid #aa77ff;color:#e6ccff;font-weight:bold;font-size:20px}
+button:active{transform:scale(0.95);background:#aa77ff}
+#stats{position:absolute;bottom:10px;right:10px;font-size:12px;background:rgba(0,0,0,0.7);padding:5px}
+</style>
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
+<div id="game">
+<canvas id="canvas" width="320" height="480"></canvas>
+<div id="stats">HP:100<br>Gold:0<br>Map:1</div>
+</div>
+<div id="controls">
+<button id="up">▲</button><button id="left">◄</button><button id="down">▼</button><button id="right">►</button><button id="attack">A</button>
+</div>
+<script>
+const canvas=document.getElementById('canvas');
+const ctx=canvas.getContext('2d');
+const TILE_SIZE=10; // 200x200 = 2000x2000px map
+let player={x:50,y:50,facing:'south',frame:0}; // Start on 's' tile
+let camera={x:0,y:0};
+let map1=[]; // YOUR 200x200 char map
 
-    <script type="module" src="./src/main.js"></script>
+// YOUR EXACT 10x10 → 200x200
+const base=["cttttttttc","lsmmmmmmmr","lvijnmmmmr","lmmmmmmmmr","lmmmmmmmmr","lmmmmmmmmr","lvmmmmmmnr","limmmmmmjr","lmmmmmmxmr","cbbbbbbbbc"];
+
+for(let y=0;y<200;y++)for(let x=0;x<200;x++){
+  let tx=x%10,ty=y%10;
+  map1[y*200+x]=base[ty][tx];
+}
+
+// PNG TILE CACHE (your b.png c.png etc)
+const tiles={};
+['b','c','i','j','l','m','n','r','s','t','v','x'].forEach(c=>{
+  const img=new Image();img.src=`assets/${c}.png`;tiles[c]=img;
+});
+
+// HERO SPRITES (your walk cycles)
+const heroFrames={};
+['south','north','east','west'].forEach(dir=>{
+  heroFrames[dir]=[];
+  for(let f=0;f<6;f++){
+    const img=new Image();img.src=`assets/sprites/hero/walk/${dir}/${f}.png`;
+    heroFrames[dir][f]=img;
+  }
+});
+
+function render(){
+  ctx.fillStyle='#000';ctx.fillRect(0,0,320,480);
+  
+  // 32x48 tiles visible (320x480 canvas)
+  for(let sy=0;sy<48;sy++)for(let sx=0;sx<32;sx++){
+    let wx=camera.x+sx,wy=camera.y+sy;
+    if(wx<200&&wy<200){
+      let tile=map1[wy*200+wx];
+      let img=tiles[tile];
+      if(img.complete){
+        ctx.drawImage(img,sx*TILE_SIZE,sy*TILE_SIZE,TILE_SIZE,TILE_SIZE);
+      }else{
+        ctx.fillStyle=tile=='c'?'#6633cc':tile=='t'?'#442288':tile=='s'?'#00ff00':'#333';
+        ctx.fillRect(sx*TILE_SIZE,sy*TILE_SIZE,TILE_SIZE,TILE_SIZE);
+      }
+    }
+  }
+  
+  // PLAYER SPRITE
+  let px=player.x-camera.x,py=player.y-camera.y;
+  ctx.fillStyle='#ffaa00';
+  ctx.fillRect(px*TILE_SIZE+2,py*TILE_SIZE+2,6,6);
+  
+  // STATS
+  document.getElementById('stats').innerHTML=`HP:100<br>Gold:0<br>Pos:${player.x},${player.y}`;
+}
+
+function move(dx,dy){
+  let nx=player.x+dx,ny=player.y+dy;
+  if(nx>0&&nx<199&&ny>0&&ny<199){
+    let tile=map1[ny*200+nx];
+    if(tile!='c'&&tile!='t'&&tile!='l'&&tile!='r'){
+      player.x=nx;player.y=ny;
+      if(dx>0)player.facing='east';
+      else if(dx<0)player.facing='west';
+      else if(dy<0)player.facing='north';
+      else player.facing='south';
+      player.frame=(player.frame+1)%6;
+      
+      camera.x=player.x-16;
+      camera.y=player.y-24;
+      camera.x=Math.max(0,Math.min(168,camera.x));
+      camera.y=Math.max(0,Math.min(152,camera.y));
+      
+      render();
+    }
+  }
+}
+
+document.getElementById('up').onclick=()=>move(0,-1);
+document.getElementById('down').onclick=()=>move(0,1);
+document.getElementById('left').onclick=()=>move(-1,0);
+document.getElementById('right').onclick=()=>move(1,0);
+document.getElementById('attack').onclick=()=>alert('BATTLE: WOOD MOUSE MAGE');
+
+render();
+</script>
 </body>
 </html>
