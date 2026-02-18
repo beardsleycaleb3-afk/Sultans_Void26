@@ -2,184 +2,106 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sultans Void 26</title>
-  <style>
-    body {
-      background: #0a0a0a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: monospace;
-      color: #00ff00;
-    }
-    #sultan-console {
-      background: linear-gradient(145deg, #1a0a2e, #0a131e);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 50px #6a0dad, inset 0 0 20px rgba(106, 13, 173, 0.3);
-      width: 320px;
-      max-width: 90vw;
-      position: relative;
-    }
-    #sultan-console::before {
-      content: 'SULTAN CONSOLE';
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1a0a2e;
-      color: #00ff41;
-      padding: 5px 15px;
-      border: 2px solid #00ff41;
-      border-radius: 15px;
-      font-size: 10px;
-      text-shadow: 0 0 10px #00ff41;
-      font-weight: bold;
-    }
-    #screen {
-      width: 240px;
-      height: 160px;
-      background: #0f0a30;
-      margin: 0 auto 20px;
-      border-radius: 10px;
-      border: 4px solid #00ff41;
-      box-shadow: inset 0 0 20px #00aa00, 0 0 30px #00ff41;
-      overflow: hidden;
-      position: relative;
-      padding: 15px;
-      box-sizing: border-box;
-      font-size: 9px;
-      line-height: 1.3;
-      overflow-y: auto;
-    }
-    #screen::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,65,0.05) 2px, rgba(0,255,65,0.05) 4px);
-      pointer-events: none;
-    }
-    #title { font-size: 12px; text-align: center; padding: 10px 0; text-shadow: 0 0 10px #00ff00; font-weight: bold; }
-    .option { padding: 3px 0; opacity: 0.6; }
-    .option.selected { opacity: 1; text-shadow: 0 0 8px #00ff41; border-left: 4px solid #00ff41; padding-left: 8px; }
-    #controls { display: flex; gap: 20px; justify-content: center; }
-    .dpad, .ab { background: #1a0a1e; border: 2px solid #444; border-radius: 15px; padding: 10px; }
-    .dpad { display: grid; grid-template: "up" "left-right" "down"; gap: 5px; }
-    .up, .down { text-align: center; font-size: 18px; font-weight: bold; }
-    .left-right { display: flex; justify-content: space-between; }
-    .left-right span { font-size: 18px; font-weight: bold; }
-    .a, .b { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; border: 3px solid #444; margin: 5px; }
-    .a { background: #ff4444; color: white; }
-    .b { background: #ffff44; color: #000; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Sultans Void26</title>
+  <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
-  <div id="sultan-console">
-    <div id="screen">
-      <div id="title">SULTANS VOID 26</div>
-      <div id="menu">
-        <div class="option selected">1. RAT SNAKE</div>
-        <div class="option">2. GEMINI WAR BOAR</div>
-        <div class="option">3. ROOSTER CRAB</div>
-        <div class="option">4. FIRE TIGER</div>
-      </div>
+  <div class="console">
+    <div class="viewport" id="viewport">
+      SULTAN'S VOID v2.6<br>
+      ===================<br>
+      [Room 1: Crystal Chamber]<br>
+      ctttttttt<br>
+      tO......<br>
+      tttttttt<br>
+      ===================<br>
+      Use D-Pad to move O<br>
+      A=Attack B=Menu<br><span class="cursor">_</span>
     </div>
-    <div id="controls">
-      <div class="dpad">
-        <div class="up">↑</div>
-        <div class="left-right">
-          <span>←</span><span>→</span>
-        </div>
-        <div class="down">↓</div>
-      </div>
-      <div class="ab">
-        <div class="a">A</div>
-        <div class="b">B</div>
-      </div>
+    
+    <div class="dpad">
+      <div class="btn" id="up">▲</div>
+      <div class="btn" id="left">◄</div>
+      <div class="btn" id="down">▼</div>
+      <div class="btn" id="right">►</div>
+    </div>
+    
+    <div class="action">
+      <div class="btn" id="attack">A</div>
+      <div class="btn" id="menu">B</div>
+    </div>
+    
+    <div class="stats" id="stats">
+      HP: 100/100<br>
+      Gold: 0<br>
+      Room: 1/9
     </div>
   </div>
 
   <script>
-    const screen = document.getElementById('screen');
-    let selected = 0;
-    let state = 'menu';
-    let options = document.querySelectorAll('.option');
-
-    function updateOptions() {
-      options = document.querySelectorAll('.option');
-      options.forEach((opt, i) => opt.classList.toggle('selected', i === selected));
+    let playerX = 1, playerY = 1;
+    const map = [
+      "ctttttttt",
+      "tO......",
+      "tttttttt"
+    ];
+    
+    function updateViewport() {
+      let screen = "SULTAN'S VOID v2.6
+===================
+";
+      screen += `[Room 1: Crystal Chamber]
+`;
+      
+      for(let y = 0; y < 3; y++) {
+        let row = map[y] || ".........";
+        screen += row.replace('O', ' ').replace(/./g, c => 
+          c === '@' ? 'O' : c === 'O' ? 'O' : c === '.' ? '·' : c
+        ) + "
+";
+      }
+      
+      screen += "===================
+";
+      screen += "Use D-Pad to move O
+A=Attack B=Menu<span class='cursor'>_</span>";
+      document.getElementById('viewport').innerHTML = screen;
     }
-
-    // D-Pad Touch Controls
-    document.querySelector('.up').addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      if (state === 'menu' || state === 'dialogue') {
-        options[selected].classList.remove('selected');
-        selected = (selected - 1 + options.length) % options.length;
-        updateOptions();
+    
+    function movePlayer(dx, dy) {
+      const newX = playerX + dx;
+      const newY = playerY + dy;
+      
+      if(newX >= 0 && newX < 8 && newY >= 0 && newY < 3 &&
+         map[newY] && map[newY][newX] !== 't' && map[newY][newX] !== 'c') {
+        map[playerY] = map[playerY].replaceAt(playerX, map[playerY][playerX] === 'O' ? '.' : map[playerY][playerX]);
+        playerX = newX; playerY = newY;
+        map[playerY] = map[playerY].replaceAt(playerX, 'O');
+        updateViewport();
       }
-    });
-
-    document.querySelector('.down').addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      if (state === 'menu' || state === 'dialogue') {
-        options[selected].classList.remove('selected');
-        selected = (selected + 1) % options.length;
-        updateOptions();
-      }
-    });
-
-    document.querySelector('.a').addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      if (state === 'menu' && selected === 0) {
-        state = 'dialogue';
-        screen.innerHTML = `
-          <div id="title">RAT SNAKE - KHA'BIT</div>
-          <div style="padding: 10px 0;">
-            "Player... Wood Mages<br>
-            stole my starfire.<br>
-            Help me burn their<br>
-            roots?"
-          </div>
-          <div id="menu" style="padding-top: 10px;">
-            <div class="option selected">YES</div>
-            <div class="option">NO</div>
-          </div>
-        `;
-        updateOptions();
-      } else if (state === 'dialogue' && selected === 0) {
-        state = 'dungeon';
-        screen.innerHTML = `
-          <div id="title">VOID PATH - ROOM 1</div>
-          <div style="font-size: 8px; line-height: 1.1; white-space: pre;">
-ctttttttt
-lsO.....  ← You are here
-lmmmmv... ← Battle ahead
-lmmmmmmm
-lmmmmmmm
-lmmmmmmm
-lmmmmmmm
-lmmmmmmm
-lmmmmmmm
-cbbbbbbb
-          </div>
-          <div style="font-size: 8px; padding-top: 5px;">
-            ↑↓←→ Move  A=Interact
-          </div>
-        `;
-      }
-    });
-
-    document.querySelector('.b').addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      alert('B = Cancel/Back');
-    });
+    }
+    
+    String.prototype.replaceAt = function(index, char) {
+      return this.substring(0, index) + char + this.substring(index + 1);
+    }
+    
+    document.getElementById('up').onclick = () => movePlayer(0, -1);
+    document.getElementById('down').onclick = () => movePlayer(0, 1);
+    document.getElementById('left').onclick = () => movePlayer(-1, 0);
+    document.getElementById('right').onclick = () => movePlayer(1, 0);
+    
+    document.getElementById('attack').onclick = () => {
+      document.getElementById('viewport').innerHTML += "<br><span class='glow'>→ ATTACK MODE</span>";
+    }
+    
+    document.getElementById('menu').onclick = () => {
+      alert("SULTAN CONSOLE
+HP:100 Gold:0 Room:1
+No saves. Pure void.");
+    }
+    
+    updateViewport();
   </script>
 </body>
 </html>
