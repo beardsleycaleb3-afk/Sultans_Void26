@@ -2,13 +2,35 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Sultan RPG</title>
-  <link rel="stylesheet" href="/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sultans Void 26</title>
+  <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
-  <div id="root"></div>
-  <link rel="stylesheet" href="/src/styles.css">
-<script type="module" src="/src/main.ts"></script>
+  <div id="sultanconsole">
+    <div id="screen">
+      <div id="title">SULTANS VOID 26</div>
+      <div id="menu">
+        <div class="option selected">1. RAT SNAKE</div>
+        <div class="option">2. GEMINI WAR BOAR</div>
+        <div class="option">3. ROOSTER CRAB</div>
+        <div class="option">4. FIRE TIGER</div>
+      </div>
+    </div>
+    <div id="controls">
+      <div class="dpad">
+        <div class="up">↑</div>
+        <div class="left-right">
+          <span>←</span> <span>→</span>
+        </div>
+        <div class="down">↓</div>
+      </div>
+      <div class="ab">
+        <div class="a">A</div>
+        <div class="b">B</div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="src/main.ts"></script>
 </body>
 </html>
