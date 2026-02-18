@@ -1,0 +1,6 @@
+body {
+  background: black;
+  color: lime;
+  font-family: monospace;
+}
+h1 { text-shadow: 0 0 10px lime; }
