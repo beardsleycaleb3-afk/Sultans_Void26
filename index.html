@@ -1,108 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Sultans Void26</title>
-  <link rel="stylesheet" href="src/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sultans Void 26</title>
+    
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#000000">
+    
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="console">
-    <div class="viewport" id="viewport">
-      SULTAN'S VOID v2.6<br>
-      ===================<br>
-      [Room 1: Crystal Chamber]<br>
-      ctttttttt<br>
-      tO......<br>
-      tttttttt<br>
-      ===================<br>
-      Use D-Pad to move O<br>
-      A=Attack B=Menu<br><span class="cursor">_</span>
-    </div>
-    
-    <div class="dpad">
-      <div class="btn" id="up">▲</div>
-      <div class="btn" id="left">◄</div>
-      <div class="btn" id="down">▼</div>
-      <div class="btn" id="right">►</div>
-    </div>
-    
-    <div class="action">
-      <div class="btn" id="attack">A</div>
-      <div class="btn" id="menu">B</div>
-    </div>
-    
-    <div class="stats" id="stats">
-      HP: 100/100<br>
-      Gold: 0<br>
-      Room: 1/9
-    </div>
-  </div>
+    <canvas id="gameCanvas"></canvas>
 
-  <script>
-    let playerX = 1, playerY = 1;
-    const map = [
-      "ctttttttt",
-      "tO......",
-      "tttttttt"
-    ];
-    
-    function updateViewport() {
-      let screen = "SULTAN'S VOID v2.6
-===================
-";
-      screen += `[Room 1: Crystal Chamber]
-`;
-      
-      for(let y = 0; y < 3; y++) {
-        let row = map[y] || ".........";
-        screen += row.replace('O', ' ').replace(/./g, c => 
-          c === '@' ? 'O' : c === 'O' ? 'O' : c === '.' ? '·' : c
-        ) + "
-";
-      }
-      
-      screen += "===================
-";
-      screen += "Use D-Pad to move O
-A=Attack B=Menu<span class='cursor'>_</span>";
-      document.getElementById('viewport').innerHTML = screen;
-    }
-    
-    function movePlayer(dx, dy) {
-      const newX = playerX + dx;
-      const newY = playerY + dy;
-      
-      if(newX >= 0 && newX < 8 && newY >= 0 && newY < 3 &&
-         map[newY] && map[newY][newX] !== 't' && map[newY][newX] !== 'c') {
-        map[playerY] = map[playerY].replaceAt(playerX, map[playerY][playerX] === 'O' ? '.' : map[playerY][playerX]);
-        playerX = newX; playerY = newY;
-        map[playerY] = map[playerY].replaceAt(playerX, 'O');
-        updateViewport();
-      }
-    }
-    
-    String.prototype.replaceAt = function(index, char) {
-      return this.substring(0, index) + char + this.substring(index + 1);
-    }
-    
-    document.getElementById('up').onclick = () => movePlayer(0, -1);
-    document.getElementById('down').onclick = () => movePlayer(0, 1);
-    document.getElementById('left').onclick = () => movePlayer(-1, 0);
-    document.getElementById('right').onclick = () => movePlayer(1, 0);
-    
-    document.getElementById('attack').onclick = () => {
-      document.getElementById('viewport').innerHTML += "<br><span class='glow'>→ ATTACK MODE</span>";
-    }
-    
-    document.getElementById('menu').onclick = () => {
-      alert("SULTAN CONSOLE
-HP:100 Gold:0 Room:1
-No saves. Pure void.");
-    }
-    
-    updateViewport();
-  </script>
+    <script type="module" src="./src/main.js"></script>
 </body>
 </html>
