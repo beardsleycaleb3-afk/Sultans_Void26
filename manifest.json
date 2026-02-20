@@ -1,0 +1,9 @@
+{
+  "short_name": "Sultan47",
+  "name": "Sultan 47 Glyph RPG",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "icons": [{"src": "https://via.placeholder.com/192/00FF00/000000?text=0O0", "sizes": "192x192", "type": "image/png"}]
+}
